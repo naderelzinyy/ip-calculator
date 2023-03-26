@@ -19,7 +19,9 @@ class AddressConverter:
         return ["{0:b}".format(int(octet)) for octet in octets]
 
     def to_binary(self) -> str:
-        """Contains all the processes of converting an address to binary."""
+        """Contains all the processes of converting an address to binary.
+        :return: ip address in binary format.
+        """
         octets = self.address.split(".")
         return ".".join(self.__octets_to_binary(octets))
 
