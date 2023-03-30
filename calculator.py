@@ -18,7 +18,22 @@ class AddressConverter:
         """
         return ["{0:b}".format(int(octet)) for octet in octets]
 
-    def to_binary(self) -> str:
+    @staticmethod
+    def add_zeros(address) -> list:
+        """Adds zeros if an octet contains less than 8 bits.
+
+        :return: a list with the whole 8 bits.
+        """
+        new_address = []
+        for octet in address:
+            if zeros_to_be_added := (8 - len(octet)):
+                for _ in range(zeros_to_be_added):
+                    octet = f"0{octet}"
+            new_address.append(octet)
+        print(f"{address = } -- {new_address = }")
+        return new_address
+
+    def to_binary(self) -> list:
         """Contains all the processes of converting an address to binary.
         :return: ip address in binary format.
         """
