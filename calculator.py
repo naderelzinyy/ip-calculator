@@ -1,3 +1,6 @@
+from typing import List
+
+
 class AddressConverter:
     """Responsible for converting IP and Subnet Mask addresses to another values.
     """
@@ -35,7 +38,7 @@ class AddressConverter:
 
     def to_binary(self) -> list:
         """Contains all the processes of converting an address to binary.
-        :return: ip address in binary format.
+        :return: List of binary octets.
         """
         octets = self.address.split(".")
         return AddressConverter.add_zeros(self.__octets_to_binary(octets))
