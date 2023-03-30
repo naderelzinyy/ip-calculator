@@ -23,7 +23,27 @@ class AddressConverter:
         :return: ip address in binary format.
         """
         octets = self.address.split(".")
-        return ".".join(self.__octets_to_binary(octets))
+        return AddressConverter.add_zeros(self.__octets_to_binary(octets))
+
+
+class IDExtractor:
+    def __init__(self, ip_address, subnet):
+        self.bin_ip = AddressConverter(address=ip_address).to_binary()
+        self.bin_subnet = AddressConverter(address=subnet).to_binary()
+
+    def get_network_id(self) -> List[str]:
+        """Extracts the network id from ip and subnet mask addresses.
+        """
+        network_id = []
+        for oct1, oct2 in zip(self.bin_ip, self.bin_subnet):
+            print(f"{oct1 = } -- {oct2 = }")
+            octet = ''
+
+            for bit1, bit2 in zip(oct1, oct2):
+                octet += str(int(bit1) & int(bit2))
+                print(f"{bit1 = } -- {bit2 = } {int(bit1) & int(bit2) =}")
+            network_id.append(octet)
+        return network_id
 
 
 if __name__ == '__main__':
